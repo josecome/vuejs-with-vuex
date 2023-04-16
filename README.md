@@ -1,14 +1,7 @@
-# vuejs_with_vuex
+# vuejs_with_pania
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+This app aim to show how to use Vue with Vuex. This is small Task Management app.
+<img src="public/vue_vuex.jpg"> 
 
 ## Project Setup
 
@@ -16,7 +9,13 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Run backend (Json Server will be served in port: 3000)
+
+```sh
+npm run start
+```
+
+### Compile and Hot-Reload for Development (App will be served in port: 5173)
 
 ```sh
 npm run dev
@@ -26,16 +25,4 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
