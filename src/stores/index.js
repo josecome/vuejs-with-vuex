@@ -6,8 +6,11 @@ const store = createStore({
     }
   },
   mutations: {
+
+  },
+  getters: {
     totalTasks (state) {
-      state.tasks.value.length
+      return state.tasks.value.length
     }
   }
 })
