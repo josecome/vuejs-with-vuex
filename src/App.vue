@@ -50,7 +50,7 @@
 export default {
   name: 'App',
   components: {
-    
+
   },
   data() {
     return {
@@ -72,6 +72,25 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
+    @import "bootstrap/dist/css/bootstrap.css";
+    @import "bootstrap-icons/font/bootstrap-icons.css";
+</style>
 
+<style scoped>
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+#iddiv {
+    width: 50px; 
+    height: 50px; 
+    text-align: center; 
+    border-radius: 50%; 
+    background-color: #2ECC71; 
+    font-size: 28px; 
+    color: white; 
+    padding: 2;
+}
 </style>
