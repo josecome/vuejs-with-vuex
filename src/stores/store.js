@@ -1,4 +1,6 @@
-const store = createStore({
+import { createStore } from "vuex";
+
+export default createStore({
   state () {
     return {
       tasks: [],
@@ -17,8 +19,11 @@ const store = createStore({
 
   },
   getters: {
+    getTasks (state) {
+      return state.tasks
+    },
     totalTasks (state) {
-      return state.tasks.value.length
+        return state.tasks.length  
     }
   }
 })

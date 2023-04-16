@@ -48,35 +48,33 @@
 </template>
 <script>
 import axios from 'axios'
+import { useStore } from 'vuex';
+import { computed } from 'vue'
 export default {
   name: 'App',
   components: {
 
   },
-  data() {
-    return {
-      tasks: [],
-      status: 'Ongoing',
-      totalTasks: 0,
-      taks_input: '',
-    }
-  },
-  methods: {
-    TasksList: function (v) {
-        this.status = v //Just in case other component need
-        this.tasks = this.tasks.filter((task) => { return task.status === v })
-    },
-    getData: async function () {
+  setup(){
+    let store = useStore()
+
+    let tasks = computed(function () {
+      return store.state.tasks
+    });
+
+    function TasksList(v) {
+      store.state.tasks = store.state.tasks.filter((task) => { return task.status === v })
+    };
+    const getData = async () => {
       const res = await axios.get("http://127.0.0.1:3000/task");
-      console.log('res: ' + res);
-      this.tasks = res.data;      
+      store.commit('addNew', res.data);
+    };
+
+    return {
+      tasks,
+      getData,
+      TasksList
     }
-  },
-  mounted() {
-    this.getData;
-  },
-  computed: {
-    
   }
 }
 </script>
