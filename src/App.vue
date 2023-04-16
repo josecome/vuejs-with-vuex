@@ -47,6 +47,7 @@
 </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'App',
   components: {
@@ -57,15 +58,22 @@ export default {
       tasks: [],
       status: 'Ongoing',
       totalTasks: 0,
+      taks_input: '',
     }
   },
   methods: {
-    totalTasks: function () {
-
-    },
     TasksList: function (v) {
-
+        this.status = v //Just in case other component need
+        this.tasks = this.tasks.filter((task) => { return task.status === v })
     },
+    getData: async function () {
+      const res = await axios.get("http://127.0.0.1:3000/task");
+      console.log('res: ' + res);
+      this.tasks = res.data;      
+    }
+  },
+  mounted() {
+    this.getData;
   },
   computed: {
     
