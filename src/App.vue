@@ -84,6 +84,22 @@ export default {
         );
         console.log(res);
     };
+    const completed = async (id) => {
+        let confirm_message = "Confirm to update task as completed"
+        if (confirm(confirm_message) == false) {
+            return false;
+        }
+        const v = { "status":"Completed" }
+        const res = await axios.patch(`http://127.0.0.1:3000/task/${id}`, v,
+          {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+          }
+        );
+        console.log(res);
+    }
     function TasksList(v) {
       store.state.tasks = store.state.tasks.filter((task) => { return task.status === v })
     };
@@ -98,7 +114,8 @@ export default {
       TasksList,
       totalTasks,
       addtask,
-      input_task
+      input_task,
+      completed
     }
   }
 }
