@@ -3,7 +3,7 @@
 <h1 style="text-align: center;">Vuejs with Vuex<br />(Task management)</h1><br />
 <div class="center" style="width: 100%;">
     <div class="center" style="display: flex;">
-        <input type="text" id="txtaddTask"  class="form-control" v-model="taks_input" 
+        <input type="text" id="txtaddTask" class="form-control" v-model="input_task" 
         placeholder="Add task"
         style="width: 180px;" />
         <button @click="addtask" class="btn btn-primary" 
@@ -50,18 +50,40 @@
 import axios from 'axios'
 import { useStore } from 'vuex';
 import { computed } from 'vue'
+import { ref } from 'vue'
 export default {
   name: 'App',
   components: {
 
   },
+  data() {
+    return {
+      taks_input: '',
+    };
+  },
   setup(){
     let store = useStore()
-
+    const input_task = ref('')
     let tasks = computed(function () {
       return store.state.tasks
     });
 
+    let totalTasks = computed(function () {
+      return store.getters.totalTasks
+    });
+    async function addtask () {
+        alert(totalTasks.value + ',' + txtaddTask)
+        const v = { "id": (Number(totalTasks) + 1), "task": input_task.value, "status":"Ongoing", "favorite":0 }
+        const res = await axios.post('http://127.0.0.1:3000/task/', v,
+          {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+          }
+        );
+        console.log(res);
+    };
     function TasksList(v) {
       store.state.tasks = store.state.tasks.filter((task) => { return task.status === v })
     };
@@ -73,7 +95,10 @@ export default {
     return {
       tasks,
       getData,
-      TasksList
+      TasksList,
+      totalTasks,
+      addtask,
+      input_task
     }
   }
 }
