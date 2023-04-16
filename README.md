@@ -1,4 +1,4 @@
-# vuejs_with_pania
+# vuejs_with_vuex
 
 This app aim to show how to use Vue with Vuex. This is small Task Management app.
 <img src="public/vue_vuex.jpg"> 
