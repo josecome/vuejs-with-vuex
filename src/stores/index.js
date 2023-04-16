@@ -6,6 +6,14 @@ const store = createStore({
     }
   },
   mutations: {
+    addNew (state, v) {
+        state.tasks = v
+    },
+    updateStatus(state) {
+        state.status = "Completed"
+    }
+  },
+  actions: {
 
   },
   getters: {
