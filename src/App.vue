@@ -6,26 +6,32 @@
         <input type="text" id="txtaddTask" class="form-control" v-model="input_task" 
         placeholder="Add task"
         style="width: 180px;" />
-        <button @click="addtask" class="btn btn-primary" 
-        style="margin-left: 10px; background-color: #0FEFEF;"
-        >Add Task</button>
+        <Button
+            @btn-click="addTask"
+            :text="'Add Task'"
+            :className="'btn btn-primary'"   
+          />
     </div>
 
     <div class="center">
         Total tasks: {{ totalTasks }}<br />
         <div style="margin-bottom: 8px;">
-            <button @click="getData" class="btn btn-primary" 
-            style="padding-left: 4px; margin-right: 4px;">
-                All tasks
-        </button>
-        <button @click="TasksList('Ongoing')" class="btn btn-primary" 
-            style="padding-left: 4px; margin-right: 4px;">
-                Ongoing
-        </button>
-        <button @click="TasksList('Completed')" class="btn btn-primary" 
-            style="padding-left: 4px; margin-right: 4px;">
-                Completed
-        </button>
+          <Button
+            @btn-click="getData"
+            :text="'All Tasks'"
+            :className="'btn btn-primary'"   
+          />
+          <Button
+            @btn-click="TasksList('Ongoing')"
+            :text="'Ongoing'"
+            :className="'btn btn-primary'"     
+          />          
+          <Button
+            @btn-click="TasksList('Completed')"
+            :text="'Completed'"
+            :className="'btn btn-primary'"     
+            :color="'#EFF2F3'"
+          />
         </div>
        
 <div class="alltasks">
@@ -49,17 +55,12 @@
 <script>
 import axios from 'axios'
 import { useStore } from 'vuex';
-import { computed } from 'vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import Button from './components/Button.vue'
 export default {
   name: 'App',
   components: {
-
-  },
-  data() {
-    return {
-      taks_input: '',
-    };
+    Button,
   },
   setup(){
     let store = useStore()
@@ -71,8 +72,7 @@ export default {
     let totalTasks = computed(function () {
       return store.getters.totalTasks
     });
-    async function addtask () {
-        alert(totalTasks.value + ',' + txtaddTask)
+    async function addTask () {
         const v = { "id": (Number(totalTasks) + 1), "task": input_task.value, "status":"Ongoing", "favorite":0 }
         const res = await axios.post('http://127.0.0.1:3000/task/', v,
           {
@@ -113,7 +113,7 @@ export default {
       getData,
       TasksList,
       totalTasks,
-      addtask,
+      addTask,
       input_task,
       completed
     }
